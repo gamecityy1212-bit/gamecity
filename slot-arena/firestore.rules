@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /bookings/{id} {
+      // Only logged-in users can read bookings
+      allow read: if request.auth != null;
+      // Logged-in users can create a valid booking for Screen 1 or Screen 2
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasAll(['date','start','end','screen','status','uid'])
+        && request.resource.data.screen in [1, 2]
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.start < request.resource.data.end;
+      // A booking can be removed by the account that created it.
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow update: if false;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+:root{--bg:#0a0c13;--panel:#121625;--line:#2a2f45;--gold:#c9a24b;--gold2:#e8cf8c;--text:#e8e6df;--mute:#8d93ab;
+--ok:#3ee0c4;--full:#ef5a62;--mixed:#e8b04a;--head:'Cinzel',Georgia,serif;--body:'Rajdhani','Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:radial-gradient(1100px 600px at 50% -10%,#1b2040 0%,var(--bg) 60%) fixed;background-color:var(--bg);
+color:var(--text);font:500 18px/1.45 var(--body);display:flex;justify-content:center;padding:24px 16px}
+.wrap{width:100%;max-width:560px}
+.hidden{display:none!important}
+
+.panel{position:relative;background:linear-gradient(180deg,#151a2c,var(--panel));border:1px solid var(--line);padding:28px 24px;margin-bottom:18px}
+.panel::before,.panel::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--gold)}
+.panel::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.panel::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+h1,h2{font-family:var(--head);font-weight:700;margin:0;color:var(--gold2);letter-spacing:.04em}
+h1{font-size:28px;text-align:center}
+h2{font-size:20px;margin-bottom:14px}
+.sub{color:var(--mute);text-align:center;margin:6px 0 22px}
+.logo{display:block;margin:0 auto 14px;width:120px;height:120px;object-fit:contain;border:0;padding:0;background:transparent}
+
+label{display:block;color:var(--mute);margin:14px 0 6px;font-size:16px}
+.small-label{margin-bottom:4px}.small-label span{font-size:13px}input.nickname{padding:7px 10px;font-size:16px}
+input{width:100%;background:#0c0f1c;color:var(--text);border:1px solid var(--line);padding:12px 14px;font:inherit;border-radius:0;color-scheme:dark}
+input:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+button{cursor:pointer;font-family:var(--body)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.primary{width:100%;margin-top:22px;padding:13px;border:1px solid var(--gold);background:linear-gradient(180deg,#d9b45a,#a98531);color:#14110a;font:700 18px var(--head);letter-spacing:.06em}
+button.primary:hover{filter:brightness(1.1)}
+button.ghost{padding:6px 14px;background:none;border:1px solid var(--gold);color:var(--gold2);font:600 15px var(--body)}
+
+.err{color:var(--full);margin-top:14px;min-height:1.4em}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.top h1{font-size:22px}
+.demo{font-size:15px;color:var(--mute);text-align:center;border:1px dashed var(--line);padding:8px;margin-top:16px}
+
+/* Result: summary banner + one card per screen */
+.summary{margin-top:22px;padding:14px 16px;border:1px solid;font:700 19px var(--head)}
+.summary.ok{border-color:var(--ok);color:var(--ok);background:rgba(62,224,196,.08)}
+.summary.mixed{border-color:var(--mixed);color:var(--mixed);background:rgba(232,176,74,.08)}
+.summary.full{border-color:var(--full);color:var(--full);background:rgba(239,90,98,.09)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{border:1px solid var(--line);background:#0c0f1c;padding:14px}
+.card.ok{border-top:3px solid var(--ok)}
+.card.full{border-top:3px solid var(--full)}
+.card h3{margin:0 0 4px;font:700 17px var(--head);color:var(--text)}
+.card .state{font-weight:600}
+.card.ok .state{color:var(--ok)}
+.card.full .state{color:var(--full)}
+.card small{display:block;color:var(--mute);font-size:15px;margin-top:4px}
+.card button.book{width:100%;margin-top:12px;padding:8px;background:none;color:var(--ok);border:1px solid var(--ok);font-weight:600;font-size:16px}
+.card button.book:hover{background:rgba(62,224,196,.1)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cols h3{margin:0 0 8px;font:700 16px var(--head);color:var(--gold2)}
+.cols li{list-style:none;padding:8px 10px;border:1px solid var(--line);background:#0c0f1c;margin-bottom:6px;color:var(--full);display:flex;gap:8px;align-items:center;justify-content:space-between}
+.cols ul{padding:0;margin:0}
+.delete-slot{border:1px solid var(--full);background:none;color:var(--full);padding:3px 7px;font:600 13px var(--body)}
+.delete-slot:hover{background:rgba(239,90,98,.1)}
+.empty{color:var(--mute)}
+
+@media (max-width:440px){.cards,.cols{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.summary,.card{animation:pop .25s ease-out}@keyframes pop{from{transform:scale(.97);opacity:0}}}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slot Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Screen 1 of the app: login (login ID, password, your image. No sign-up) -->
+  <section id="loginView" class="panel">
+    <img class="logo" src="assets/Gamecity%20Image.png" alt="Logo">
+    <h1>Game City</h1>
+    <p class="sub">Log in to check your time slot</p>
+    <label for="lid">Email ID</label>
+    <input id="lid" autocomplete="username" autocapitalize="off">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autocomplete="current-password">
+    <div id="loginErr" class="err" role="alert"></div>
+    <button id="loginBtn" class="primary">Log in</button>
+    <div id="demoNote" class="demo hidden">Demo mode: Firebase is not set up yet. Use ID <b>player1</b> and password <b>demo123</b>.</div>
+  </section>
+
+  <!-- Home page -->
+  <section id="homeView" class="hidden">
+    <div class="top"><h1>Slot Arena</h1><button id="logoutBtn" class="ghost">Log out</button></div>
+
+    <div class="panel">
+      <h2>Check a time slot</h2>
+      <label for="date">Date</label>
+      <input id="date" type="date">
+      <div class="row">
+        <div><label for="start">From</label><input id="start" type="time" step="900" value="10:00"></div>
+        <div><label for="end">To</label><input id="end" type="time" step="900" value="10:30"></div>
+      </div>
+      <label for="nickname" class="small-label">Nickname <span>(optional)</span></label>
+      <input id="nickname" class="nickname" type="text" maxlength="30" placeholder="e.g. Tanmay" autocomplete="off">
+      <div id="formErr" class="err" role="alert"></div>
+      <button id="checkBtn" class="primary">Check slots</button>
+      <div id="result"></div>
+    </div>
+
+    <div class="panel">
+      <h2 id="dayTitle">Booked on this date</h2>
+      <div id="dayList" class="cols"></div>
+    </div>
+  </section>
+
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
