@@ -23,6 +23,8 @@ label{display:block;color:var(--mute);margin:14px 0 6px;font-size:16px}
 input{width:100%;background:#0c0f1c;color:var(--text);border:1px solid var(--line);padding:12px 14px;font:inherit;border-radius:0;color-scheme:dark}
 input:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.midnight-toggle{display:flex;align-items:center;gap:8px;cursor:pointer}
+.midnight-toggle input{width:16px;height:16px;padding:0;border:0;background:transparent;accent-color:var(--gold)}
 
 button{cursor:pointer;font-family:var(--body)}
 button:disabled{opacity:.45;cursor:not-allowed}
