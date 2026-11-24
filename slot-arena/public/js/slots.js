@@ -4,6 +4,8 @@ import { OPEN, CLOSE, SCREENS } from "./config.js";
 export const todayStr = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
 
 export function t12(t) {
+  // 24:00 is our internal value for the midnight immediately after the date.
+  if (t === "24:00") return "12:00 AM (midnight)";
   let [h, m] = t.split(":").map(Number);
   const s = h >= 12 ? "PM" : "AM"; h = h % 12 || 12;
   return `${h}:${String(m).padStart(2, "0")} ${s}`;
