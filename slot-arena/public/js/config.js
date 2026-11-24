@@ -9,9 +9,10 @@ export const firebaseConfig = {
 // Login ID "raj" is stored in Firebase Auth as raj@slotarena.app
 export const EMAIL_DOMAIN = "@slotarena.app";
 
-// Business hours (24h)
+// Business hours (24h). Use 24:00 for midnight at the *end* of a booking date.
+// (00:00 is midnight at the beginning of that date.)
 export const OPEN = "10:00";
-export const CLOSE = "23:59";
+export const CLOSE = "24:00";
 
 // The screens that can be booked
 export const SCREENS = [
