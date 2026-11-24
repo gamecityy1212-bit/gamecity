@@ -48,7 +48,10 @@ async function refreshDay() {
 }
 
 async function check() {
-  const date = $("date").value, start = $("start").value, end = $("end").value;
+  const date = $("date").value, start = $("start").value;
+  // Native time controls use 00:00 for the start of a date and cannot enter 24:00.
+  // This checkbox deliberately means the midnight immediately following `date`.
+  const end = $("endAtMidnight").checked ? "24:00" : $("end").value;
   const nickname = $("nickname").value.trim();
   const msg = validate(date, start, end);
   $("formErr").textContent = msg; $("result").innerHTML = "";
@@ -75,5 +78,9 @@ async function check() {
 }
 $("checkBtn").onclick = check;
 $("date").onchange = () => { $("result").innerHTML = ""; refreshDay(); };
+$("endAtMidnight").onchange = event => {
+  $("end").disabled = event.target.checked;
+  $("result").innerHTML = "";
+};
 
 onUserChange(loggedIn => { showHome(loggedIn); if (loggedIn) refreshDay(); });
