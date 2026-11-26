@@ -4,6 +4,7 @@ import { t12, dateLabel } from "./slots.js";
 
 export const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const rupees = value => Number.isFinite(Number(value)) ? `₹${Number(value).toLocaleString("en-IN")}` : "Not recorded";
 
 export function showHome(on) {
   $("loginView").classList.toggle("hidden", on);
@@ -30,7 +31,7 @@ export function renderBooked(date, bookings, onDelete) {
   $("dayList").innerHTML = SCREENS.map(s => {
     const list = bookings.filter(b => b.screen === s.id).sort((a, b) => a.start.localeCompare(b.start));
     return `<div><h3>${esc(s.name)}</h3>${list.length
-      ? `<ul>${list.map(b => `<li><span>${t12(b.start)} to ${t12(b.end)}${b.nickname ? ` — ${esc(b.nickname)}` : ""}</span><button class="delete-slot" data-id="${esc(b.id)}" aria-label="Delete this booking">Delete</button></li>`).join("")}</ul>`
+      ? `<ul>${list.map(b => `<li><span>${t12(b.start)} to ${t12(b.end)}${b.nickname ? ` — ${esc(b.nickname)}` : ""}<small class="booking-price">Booking price: ${rupees(b.bookingPrice)}</small></span><button class="delete-slot" data-id="${esc(b.id)}" aria-label="Delete this booking">Delete</button></li>`).join("")}</ul>`
       : '<p class="empty">Open all day</p>'}</div>`;
   }).join("");
   $("dayList").querySelectorAll(".delete-slot").forEach(button => {
