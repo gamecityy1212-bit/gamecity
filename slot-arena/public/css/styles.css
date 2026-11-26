@@ -58,6 +58,7 @@ button.ghost{padding:6px 14px;background:none;border:1px solid var(--gold);color
 .cols h3{margin:0 0 8px;font:700 16px var(--head);color:var(--gold2)}
 .cols li{list-style:none;padding:8px 10px;border:1px solid var(--line);background:#0c0f1c;margin-bottom:6px;color:var(--full);display:flex;gap:8px;align-items:center;justify-content:space-between}
 .cols ul{padding:0;margin:0}
+.booking-price{display:block;color:var(--gold2);font-size:14px;margin-top:2px}
 .delete-slot{border:1px solid var(--full);background:none;color:var(--full);padding:3px 7px;font:600 13px var(--body)}
 .delete-slot:hover{background:rgba(239,90,98,.1)}
 .empty{color:var(--mute)}
