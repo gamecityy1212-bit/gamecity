@@ -41,6 +41,8 @@
       <label class="midnight-toggle" for="endAtMidnight"><input id="endAtMidnight" type="checkbox"> End at midnight (12:00 AM)</label>
       <label for="nickname" class="small-label">Nickname <span>(optional)</span></label>
       <input id="nickname" class="nickname" type="text" maxlength="30" placeholder="e.g. Tanmay" autocomplete="off">
+      <label for="bookingPrice" class="small-label">Booking price (₹) <span>(required, per slot)</span></label>
+      <input id="bookingPrice" class="nickname" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 500" required>
       <div id="formErr" class="err" role="alert"></div>
       <button id="checkBtn" class="primary">Check slots</button>
       <div id="result"></div>
