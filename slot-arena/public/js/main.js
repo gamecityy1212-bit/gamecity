@@ -53,9 +53,13 @@ async function check() {
   // This checkbox deliberately means the midnight immediately following `date`.
   const end = $("endAtMidnight").checked ? "24:00" : $("end").value;
   const nickname = $("nickname").value.trim();
+  const bookingPrice = Number($("bookingPrice").value);
   const msg = validate(date, start, end);
-  $("formErr").textContent = msg; $("result").innerHTML = "";
-  if (msg) return;
+  const priceMsg = !Number.isFinite(bookingPrice) || bookingPrice <= 0
+    ? "Enter a booking price in rupees for this slot."
+    : "";
+  $("formErr").textContent = msg || priceMsg; $("result").innerHTML = "";
+  if (msg || priceMsg) return;
 
   $("checkBtn").disabled = true;
   try {
@@ -67,7 +71,7 @@ async function check() {
       // Re-check right before saving, in case someone booked in the meantime
       const fresh = availability(await getBookings(date), start, end).find(r => r.screen.id === screenId);
       if (!fresh.free) { check(); return; }
-      await addBooking({ date, screen: screenId, start, end, nickname });
+      await addBooking({ date, screen: screenId, start, end, nickname, bookingPrice });
       showBooked(SCREENS.find(s => s.id === screenId).name, range);
       refreshDay();
     });
