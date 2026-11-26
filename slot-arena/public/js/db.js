@@ -21,9 +21,9 @@ export async function getFirebase() {
 // ---- demo data (so you can try every scenario before Firebase is connected) ----
 const today = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
 const demoBookings = [
-  { id: "demo-1", date: today(), screen: 1, start: "10:00", end: "10:30", status: "confirmed" }, // Screen 1 busy
-  { id: "demo-2", date: today(), screen: 1, start: "14:00", end: "15:00", status: "confirmed" },
-  { id: "demo-3", date: today(), screen: 2, start: "14:00", end: "15:00", status: "confirmed" }  // both busy at 14:00
+  { id: "demo-1", date: today(), screen: 1, start: "10:00", end: "10:30", bookingPrice: 500, status: "confirmed" }, // Screen 1 busy
+  { id: "demo-2", date: today(), screen: 1, start: "14:00", end: "15:00", bookingPrice: 1000, status: "confirmed" },
+  { id: "demo-3", date: today(), screen: 2, start: "14:00", end: "15:00", bookingPrice: 1000, status: "confirmed" }  // both busy at 14:00
 ];
 
 // All active bookings for one date (both screens)
@@ -34,11 +34,11 @@ export async function getBookings(date) {
   return snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(b => b.status !== "cancelled");
 }
 
-export async function addBooking({ date, screen, start, end, nickname }) {
-  if (DEMO) { demoBookings.push({ id: `demo-${Date.now()}`, date, screen, start, end, nickname, status: "confirmed" }); return; }
+export async function addBooking({ date, screen, start, end, nickname, bookingPrice }) {
+  if (DEMO) { demoBookings.push({ id: `demo-${Date.now()}`, date, screen, start, end, nickname, bookingPrice, status: "confirmed" }); return; }
   const { auth, db, fsM } = await getFirebase();
   await fsM.addDoc(fsM.collection(db, "bookings"), {
-    date, screen, start, end, nickname, status: "confirmed",
+    date, screen, start, end, nickname, bookingPrice, status: "confirmed",
     uid: auth.currentUser.uid, createdAt: fsM.serverTimestamp()
   });
 }
